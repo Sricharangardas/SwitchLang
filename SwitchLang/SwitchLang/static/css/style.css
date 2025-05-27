@@ -1,0 +1,13 @@
+body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    background-color: #f5f5f5;
+}
+textarea, select {
+    width: 100%;
+    padding: 8px;
+}
+button {
+    padding: 10px 20px;
+    margin-top: 10px;
+}

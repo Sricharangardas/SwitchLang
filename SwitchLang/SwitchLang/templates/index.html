@@ -1,28 +1,26 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Code-Switching NLP</title>
-    <link rel="stylesheet" href="styles.css">
+  <title>SwitchLang Translator</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 </head>
 <body>
-    <h1>Code-Switching NLP Model</h1>
-    <textarea id="userInput" placeholder="Enter text..."></textarea>
-    <button onclick="processText()">Analyze</button>
-    <div id="result"></div>
+  <h1>Translate Code-Switched Text</h1>
+  <form method="POST">
+    {% csrf_token %}
+    <textarea name="text" rows="5" cols="60" placeholder="Enter code-switched text"></textarea><br><br>
+    <select name="target_lang">
+      <option value="en_XX">English</option>
+      <option value="hi_IN">Hindi</option>
+      <option value="es_XX">Spanish</option>
+    </select><br><br>
+    <button type="submit">Translate</button>
+  </form>
 
-    <script>
-        async function processText() {
-            let text = document.getElementById("userInput").value;
-            let response = await fetch('/process/', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ text: text })
-            });
-            let data = await response.json();
-            document.getElementById("result").innerText = JSON.stringify(data.prediction, null, 2);
-        }
-    </script>
+  {% if translation %}
+    <h2>Translation:</h2>
+    <p>{{ translation }}</p>
+  {% endif %}
 </body>
 </html>
