@@ -1,10 +1,10 @@
-from transformers import MBartTokenizer, MBartForConditionalGeneration
+from transformers import MBart50TokenizerFast, MBartForConditionalGeneration
 
 # Correct path to the model files
-cache_dir = "C:/Users/YASH/.cache/huggingface/hub/models--facebook--mbart-large-cc25/"
+cache_dir = "C:/Users/YASH/.cache/huggingface/hub/models--facebook--mbart-large-50-many-to-many-mmt"
 
 # Load the tokenizer and model from the local cache
-tokenizer = MBartTokenizer.from_pretrained(cache_dir)
+tokenizer = MBart50TokenizerFast.from_pretrained(cache_dir)
 model = MBartForConditionalGeneration.from_pretrained(cache_dir)
 
 # In translator.py
@@ -27,18 +27,21 @@ def map_lang_code(detected_lang):
 
 # Example function for translation
 def translate(text, src_lang, tgt_lang):
-    # Encode the text
-    inputs = tokenizer(text, return_tensors="pt", padding=True, truncation=True)
+    tokenizer.src_lang = src_lang  # e.g., "en_XX"
 
-    # Generate translation (using the model)
-    translated_tokens = model.generate(
-        inputs["input_ids"], 
-        decoder_start_token_id=model.config.pad_token_id,
-        forced_bos_token_id=model.config.lang2id[tgt_lang],
+    inputs = tokenizer(
+        text,
+        return_tensors="pt",
+        padding=True,
+        truncation=True,
+        max_length=512  # specify maximum length
+    )
+
+    generated_tokens = model.generate(
+        **inputs,
+        forced_bos_token_id=tokenizer.convert_tokens_to_ids(tgt_lang),
         max_length=512
     )
 
-    # Decode the translated tokens
-    translated_text = tokenizer.decode(translated_tokens[0], skip_special_tokens=True)
+    return tokenizer.decode(generated_tokens[0], skip_special_tokens=True)
 
-    return translated_text
