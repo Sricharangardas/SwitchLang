@@ -1,26 +1,35 @@
 {% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
   <title>SwitchLang Translator</title>
-  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <script src="{% static 'js/script.js' %}" defer></script>
 </head>
 <body>
-  <h1>Translate Code-Switched Text</h1>
-  <form method="POST">
-    {% csrf_token %}
-    <textarea name="text" rows="5" cols="60" placeholder="Enter code-switched text"></textarea><br><br>
-    <select name="target_lang">
-      <option value="en_XX">English</option>
-      <option value="hi_IN">Hindi</option>
-      <option value="es_XX">Spanish</option>
-    </select><br><br>
-    <button type="submit">Translate</button>
-  </form>
+  <div class="container">
+    <h1>🌐 SwitchLang Translator</h1>
+    <form method="POST" id="translateForm">
+      {% csrf_token %}
+      <textarea name="text" rows="5" placeholder="Enter code-switched text..."></textarea>
+      
+      <select name="target_lang">
+        <option value="en_XX">English</option>
+        <option value="hi_IN">Hindi</option>
+        <option value="es_XX">Spanish</option>
+      </select>
 
-  {% if translation %}
-    <h2>Translation:</h2>
-    <p>{{ translation }}</p>
-  {% endif %}
+      <button type="submit">Translate</button>
+      <div id="loader" class="hidden">🔄 Translating...</div>
+    </form>
+
+    {% if translation %}
+      <div class="result fade-in">
+        <h2>✅ Translation:</h2>
+        <p>{{ translation }}</p>
+      </div>
+    {% endif %}
+  </div>
 </body>
 </html>
