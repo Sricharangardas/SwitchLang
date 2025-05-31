@@ -1,7 +1,7 @@
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from langdetect import detect
-from mbart_model.translator import translate, map_lang_code
+from mbart_model.translator import translate_code_switched_to_target, map_lang_code
 import json
 
 @csrf_exempt
@@ -17,7 +17,7 @@ def process_text(request):
 
             detected_lang = detect(text)
             src_lang = map_lang_code(detected_lang)
-            translated = translate(text, src_lang, target_lang)
+            translated = translate_code_switched_to_target(text, target_lang)
 
             return JsonResponse({
                 'input': text,
