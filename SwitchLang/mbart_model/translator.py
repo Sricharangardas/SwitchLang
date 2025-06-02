@@ -101,5 +101,8 @@ def translate_code_switched_to_target(text, target_lang):
         english = translate(sentence, src_lang, "en_XX")
         english_segments.append(english)
     combined_english = ' '.join(english_segments)
+    # If the target language is English, return the combined English directly
+    if target_lang == "en_XX":
+        return combined_english
     final_translation = translate(combined_english, "en_XX", target_lang)
     return final_translation
