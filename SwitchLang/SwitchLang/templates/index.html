@@ -13,57 +13,57 @@
     <h1>🌐 SwitchLang Translator</h1>
     <form method="POST" id="translateForm">
       {% csrf_token %}
-      <textarea name="text" rows="5" placeholder="Enter code-switched text..."></textarea>
+      <textarea name="text" rows="5" placeholder="Enter code-switched text...">{{ request.POST.text|default_if_none:"" }}</textarea>
       
       <select name="target_lang">
-        <!--<option value="af_ZA">Afrikaans</option>
-        <option value="ar_AR">Arabic</option>-->
-        <option value="az_AZ">Azerbaijani</option>
-        <option value="bn_IN">Bengali</option>
-        <option value="my_MM">Burmese</option>
-        <option value="zh_CN">Chinese</option>
-        <option value="hr_HR">Croatian</option>
-        <option value="cs_CZ">Czech</option>
-        <option value="nl_XX">Dutch</option>
-        <option value="en_XX">English</option>
-        <option value="et_EE">Estonian</option>
-        <option value="fi_FI">Finnish</option>
-        <option value="fr_XX">French</option>
-        <option value="ka_GE">Georgian</option>
-        <option value="de_DE">German</option>
-        <option value="gu_IN">Gujarati</option>
-        <option value="he_IL">Hebrew</option>
-        <option value="hi_IN">Hindi</option>
-        <option value="id_ID">Indonesian</option>
-        <option value="it_IT">Italian</option>
-        <option value="ja_XX">Japanese</option>
-        <option value="km_KH">Khmer</option>
-        <option value="ko_KR">Korean</option>
-        <option value="lv_LV">Latvian</option>
-        <option value="lt_LT">Lithuanian</option>
-        <option value="mk_MK">Macedonian</option>
-        <option value="ml_IN">Malayalam</option>
-        <option value="mr_IN">Marathi</option>
-        <option value="mn_MN">Mongolian</option>
-        <option value="ne_NP">Nepali</option>
-        <option value="fa_IR">Persian</option>
-        <option value="pl_PL">Polish</option>
-        <option value="ps_AF">Pashto</option>
-        <option value="pt_XX">Portuguese</option>
-        <option value="ro_RO">Romanian</option>
-        <option value="ru_RU">Russian</option>
-        <option value="si_LK">Sinhala</option>
-        <option value="sl_SI">Slovenian</option>
-        <option value="es_XX">Spanish</option>
-        <option value="sv_SE">Swedish</option>
-        <option value="ta_IN">Tamil</option>
-        <option value="te_IN">Telugu</option>
-        <option value="th_TH">Thai</option>
-        <!--<option value="tr_TR">Turkish</option>-->
-        <option value="uk_UA">Ukrainian</option>
-        <option value="ur_PK">Urdu</option>
-        <option value="vi_VN">Vietnamese</option>
-        <!--<option value="xh_ZA">Xhosa</option>-->
+        <!--<option value="af_ZA" {% if request.POST.target_lang == "af_ZA" %}selected{% endif %}>Afrikaans</option>
+        <option value="ar_AR" {% if request.POST.target_lang == "ar_AR" %}selected{% endif %}>Arabic</option>-->
+        <option value="az_AZ" {% if request.POST.target_lang == "az_AZ" %}selected{% endif %}>Azerbaijani</option>
+        <option value="bn_IN" {% if request.POST.target_lang == "bn_IN" %}selected{% endif %}>Bengali</option>
+        <option value="my_MM" {% if request.POST.target_lang == "my_MM" %}selected{% endif %}>Burmese</option>
+        <option value="zh_CN" {% if request.POST.target_lang == "zh_CN" %}selected{% endif %}>Chinese</option>
+        <option value="hr_HR" {% if request.POST.target_lang == "hr_HR" %}selected{% endif %}>Croatian</option>
+        <option value="cs_CZ" {% if request.POST.target_lang == "cs_CZ" %}selected{% endif %}>Czech</option>
+        <option value="nl_XX" {% if request.POST.target_lang == "nl_XX" %}selected{% endif %}>Dutch</option>
+        <option value="en_XX" {% if request.POST.target_lang == "en_XX" %}selected{% endif %}>English</option>
+        <option value="et_EE" {% if request.POST.target_lang == "et_EE" %}selected{% endif %}>Estonian</option>
+        <option value="fi_FI" {% if request.POST.target_lang == "fi_FI" %}selected{% endif %}>Finnish</option>
+        <option value="fr_XX" {% if request.POST.target_lang == "fr_XX" %}selected{% endif %}>French</option>
+        <option value="ka_GE" {% if request.POST.target_lang == "ka_GE" %}selected{% endif %}>Georgian</option>
+        <option value="de_DE" {% if request.POST.target_lang == "de_DE" %}selected{% endif %}>German</option>
+        <option value="gu_IN" {% if request.POST.target_lang == "gu_IN" %}selected{% endif %}>Gujarati</option>
+        <option value="he_IL" {% if request.POST.target_lang == "he_IL" %}selected{% endif %}>Hebrew</option>
+        <option value="hi_IN" {% if request.POST.target_lang == "hi_IN" %}selected{% endif %}>Hindi</option>
+        <option value="id_ID" {% if request.POST.target_lang == "id_ID" %}selected{% endif %}>Indonesian</option>
+        <option value="it_IT" {% if request.POST.target_lang == "it_IT" %}selected{% endif %}>Italian</option>
+        <option value="ja_XX" {% if request.POST.target_lang == "ja_XX" %}selected{% endif %}>Japanese</option>
+        <option value="km_KH" {% if request.POST.target_lang == "km_KH" %}selected{% endif %}>Khmer</option>
+        <option value="ko_KR" {% if request.POST.target_lang == "ko_KR" %}selected{% endif %}>Korean</option>
+        <option value="lv_LV" {% if request.POST.target_lang == "lv_LV" %}selected{% endif %}>Latvian</option>
+        <option value="lt_LT" {% if request.POST.target_lang == "lt_LT" %}selected{% endif %}>Lithuanian</option>
+        <option value="mk_MK" {% if request.POST.target_lang == "mk_MK" %}selected{% endif %}>Macedonian</option>
+        <option value="ml_IN" {% if request.POST.target_lang == "ml_IN" %}selected{% endif %}>Malayalam</option>
+        <option value="mr_IN" {% if request.POST.target_lang == "mr_IN" %}selected{% endif %}>Marathi</option>
+        <option value="mn_MN" {% if request.POST.target_lang == "mn_MN" %}selected{% endif %}>Mongolian</option>
+        <option value="ne_NP" {% if request.POST.target_lang == "ne_NP" %}selected{% endif %}>Nepali</option>
+        <option value="fa_IR" {% if request.POST.target_lang == "fa_IR" %}selected{% endif %}>Persian</option>
+        <option value="pl_PL" {% if request.POST.target_lang == "pl_PL" %}selected{% endif %}>Polish</option>
+        <option value="ps_AF" {% if request.POST.target_lang == "ps_AF" %}selected{% endif %}>Pashto</option>
+        <option value="pt_XX" {% if request.POST.target_lang == "pt_XX" %}selected{% endif %}>Portuguese</option>
+        <option value="ro_RO" {% if request.POST.target_lang == "ro_RO" %}selected{% endif %}>Romanian</option>
+        <option value="ru_RU" {% if request.POST.target_lang == "ru_RU" %}selected{% endif %}>Russian</option>
+        <option value="si_LK" {% if request.POST.target_lang == "si_LK" %}selected{% endif %}>Sinhala</option>
+        <option value="sl_SI" {% if request.POST.target_lang == "sl_SI" %}selected{% endif %}>Slovenian</option>
+        <option value="es_XX" {% if request.POST.target_lang == "es_XX" %}selected{% endif %}>Spanish</option>
+        <option value="sv_SE" {% if request.POST.target_lang == "sv_SE" %}selected{% endif %}>Swedish</option>
+        <option value="ta_IN" {% if request.POST.target_lang == "ta_IN" %}selected{% endif %}>Tamil</option>
+        <option value="te_IN" {% if request.POST.target_lang == "te_IN" %}selected{% endif %}>Telugu</option>
+        <option value="th_TH" {% if request.POST.target_lang == "th_TH" %}selected{% endif %}>Thai</option>
+        <!--<option value="tr_TR" {% if request.POST.target_lang == "tr_TR" %}selected{% endif %}>Turkish</option>-->
+        <option value="uk_UA" {% if request.POST.target_lang == "uk_UA" %}selected{% endif %}>Ukrainian</option>
+        <option value="ur_PK" {% if request.POST.target_lang == "ur_PK" %}selected{% endif %}>Urdu</option>
+        <option value="vi_VN" {% if request.POST.target_lang == "vi_VN" %}selected{% endif %}>Vietnamese</option>
+        <!--<option value="xh_ZA" {% if request.POST.target_lang == "xh_ZA" %}selected{% endif %}>Xhosa</option>-->
       </select>
 
       <button type="submit">Translate</button>
