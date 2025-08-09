@@ -4,7 +4,7 @@ from nltk import sent_tokenize
 from langdetect import detect
 
 # Correct path to the model files
-cache_dir = "C:/Users/YASH/.cache/huggingface/hub/models--facebook--mbart-large-50-many-to-many-mmt"
+cache_dir = "C:/Users/91934/.cache/huggingface/hub/models--facebook--mbart-large-50-many-to-many-mmt"
 
 # Load the tokenizer and model from the local cache
 tokenizer = MBart50TokenizerFast.from_pretrained(cache_dir)
